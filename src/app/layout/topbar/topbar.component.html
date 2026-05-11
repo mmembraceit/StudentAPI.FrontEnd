@@ -1,0 +1,27 @@
+<header class="topbar">
+  <div class="topbar-start">
+    <span class="topbar-logo">
+      <i class="pi pi-graduation-cap"></i>
+      School System
+    </span>
+  </div>
+
+  <div class="topbar-end">
+    @if (user$ | async; as user) {
+      <span class="topbar-username">{{ user.fullName }}</span>
+      <p-avatar
+        [label]="user.fullName.charAt(0).toUpperCase()"
+        shape="circle"
+        class="topbar-avatar"
+      />
+    }
+    <p-button
+      icon="pi pi-sign-out"
+      [text]="true"
+      [rounded]="true"
+      severity="secondary"
+      pTooltip="Cerrar sesión"
+      (onClick)="logout()"
+    />
+  </div>
+</header>
