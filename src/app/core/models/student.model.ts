@@ -7,7 +7,7 @@ export interface Student {
   status: StudentStatus;
 }
 
-export type StudentStatus = 'Active' | 'Inactive' | 'Graduated';
+export type StudentStatus = 'Active' | 'Inactive';
 
 export interface CreateStudentRequest {
   firstName: string;

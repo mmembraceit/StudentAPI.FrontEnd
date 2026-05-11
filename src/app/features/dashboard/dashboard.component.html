@@ -1,0 +1,36 @@
+<div class="dashboard-header">
+  <h2 class="dashboard-title">Dashboard</h2>
+  <p class="dashboard-subtitle">Resumen general del sistema escolar</p>
+</div>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <div class="stat-icon total">
+      <i class="pi pi-users"></i>
+    </div>
+    <div class="stat-info">
+      <span class="stat-value">{{ totalCount$ | async }}</span>
+      <span class="stat-label">Total Estudiantes</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon active">
+      <i class="pi pi-check-circle"></i>
+    </div>
+    <div class="stat-info">
+      <span class="stat-value">{{ activeCount$ | async }}</span>
+      <span class="stat-label">Estudiantes Activos</span>
+    </div>
+  </div>
+
+  <div class="stat-card">
+    <div class="stat-icon inactive">
+      <i class="pi pi-times-circle"></i>
+    </div>
+    <div class="stat-info">
+      <span class="stat-value">{{ inactiveCount$ | async }}</span>
+      <span class="stat-label">Estudiantes Inactivos</span>
+    </div>
+  </div>
+</div>
