@@ -1,0 +1,70 @@
+<form [formGroup]="form" (ngSubmit)="submit()" novalidate class="dialog-form">
+
+  <div class="form-row">
+    <div class="field">
+      <label>Nombre *</label>
+      <input pInputText formControlName="firstName" placeholder="Ana" />
+      @if (isInvalid('firstName')) {
+        <small class="error-msg">El nombre es obligatorio (mín. 2 caracteres).</small>
+      }
+    </div>
+    <div class="field">
+      <label>Apellido *</label>
+      <input pInputText formControlName="lastName" placeholder="López" />
+      @if (isInvalid('lastName')) {
+        <small class="error-msg">El apellido es obligatorio (mín. 2 caracteres).</small>
+      }
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Correo electrónico *</label>
+    <input pInputText formControlName="email" type="email" placeholder="ana@escuela.com" />
+    @if (isInvalid('email')) {
+      <small class="error-msg">Ingresa un correo válido.</small>
+    }
+  </div>
+
+  <div class="form-row">
+    <div class="field">
+      <label>Fecha de nacimiento *</label>
+      <p-datepicker
+        formControlName="dateOfBirth"
+        placeholder="dd/mm/yyyy"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+        styleClass="w-full"
+      />
+      @if (isInvalid('dateOfBirth')) {
+        <small class="error-msg">La fecha es obligatoria.</small>
+      }
+    </div>
+    <div class="field">
+      <label>Estado *</label>
+      <p-select
+        formControlName="status"
+        [options]="statusOptions"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Selecciona"
+        styleClass="w-full"
+      />
+    </div>
+  </div>
+
+  <div class="dialog-actions">
+    <p-button
+      type="button"
+      label="Cancelar"
+      severity="secondary"
+      [text]="true"
+      (onClick)="cancel()"
+    />
+    <p-button
+      type="submit"
+      [label]="isEditMode ? 'Guardar cambios' : 'Crear estudiante'"
+      icon="pi pi-check"
+    />
+  </div>
+
+</form>

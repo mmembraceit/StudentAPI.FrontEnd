@@ -1,0 +1,102 @@
+<div class="list-header">
+  <div>
+    <h2 class="list-title">Estudiantes</h2>
+    <p class="list-subtitle">Gestión de estudiantes del sistema</p>
+  </div>
+  <p-button
+    label="Nuevo Estudiante"
+    icon="pi pi-plus"
+    (onClick)="openCreate()"
+  />
+</div>
+
+<div class="list-card">
+  <div class="search-bar">
+    <p-iconfield>
+      <p-inputicon styleClass="pi pi-search" />
+      <input
+        pInputText
+        type="text"
+        placeholder="Buscar por nombre o correo..."
+        [formControl]="searchControl"
+        class="search-input"
+      />
+    </p-iconfield>
+  </div>
+
+  <p-table
+    [value]="(students$ | async) ?? []"
+    [lazy]="true"
+    [paginator]="true"
+    [rows]="pageSize"
+    [totalRecords]="(totalCount$ | async) ?? 0"
+    [loading]="(isLoading$ | async) ?? false"
+    [rowsPerPageOptions]="[5, 10, 25]"
+    (onLazyLoad)="onLazyLoad($event)"
+    [tableStyle]="{ 'min-width': '60rem' }"
+    stripedRows
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Correo</th>
+        <th>Fecha de Nacimiento</th>
+        <th>Estado</th>
+        <th style="width: 10rem; text-align: center">Acciones</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-student>
+      <tr>
+        <td>{{ student.firstName }}</td>
+        <td>{{ student.lastName }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.dateOfBirth | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <p-tag
+            [value]="student.status"
+            [severity]="getSeverity(student.status)"
+          />
+        </td>
+        <td>
+          <div class="action-buttons">
+            <p-button
+              icon="pi pi-eye"
+              [text]="true"
+              [rounded]="true"
+              severity="info"
+              pTooltip="Ver detalle"
+              (onClick)="openDetail(student)"
+            />
+            <p-button
+              icon="pi pi-pencil"
+              [text]="true"
+              [rounded]="true"
+              severity="secondary"
+              pTooltip="Editar"
+              (onClick)="openEdit(student)"
+            />
+            <p-button
+              icon="pi pi-trash"
+              [text]="true"
+              [rounded]="true"
+              severity="danger"
+              pTooltip="Eliminar"
+              (onClick)="confirmDelete(student)"
+            />
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="6" style="text-align: center; padding: 2rem;">
+          <i class="pi pi-users" style="font-size: 2rem; color: #94a3b8;"></i>
+          <p style="margin: 0.5rem 0 0; color: #94a3b8;">No se encontraron estudiantes</p>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

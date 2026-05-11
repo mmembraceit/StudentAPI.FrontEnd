@@ -1,0 +1,35 @@
+<div class="detail-wrapper">
+  <div class="detail-hero">
+    <p-avatar
+      [label]="student.firstName.charAt(0) + student.lastName.charAt(0)"
+      shape="circle"
+      size="xlarge"
+      class="detail-avatar"
+    />
+    <div>
+      <h3 class="detail-name">{{ student.firstName }} {{ student.lastName }}</h3>
+      <p-tag [value]="student.status" [severity]="getSeverity(student.status)" />
+    </div>
+  </div>
+
+  <p-divider />
+
+  <div class="detail-grid">
+    <div class="detail-item">
+      <span class="detail-label"><i class="pi pi-envelope"></i> Correo</span>
+      <span class="detail-value">{{ student.email }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label"><i class="pi pi-calendar"></i> Fecha de nacimiento</span>
+      <span class="detail-value">{{ student.dateOfBirth | date: 'dd/MM/yyyy' }}</span>
+    </div>
+    <div class="detail-item">
+      <span class="detail-label"><i class="pi pi-id-card"></i> ID</span>
+      <span class="detail-value id-value">{{ student.id }}</span>
+    </div>
+  </div>
+
+  <div class="detail-actions">
+    <p-button label="Cerrar" severity="secondary" [text]="true" (onClick)="close()" />
+  </div>
+</div>
